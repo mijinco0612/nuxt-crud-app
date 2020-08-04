@@ -1,34 +1,26 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
-      <h1 class="title">
-        nuxt-crud-app
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <p>{{ $store.state.employees.employees }}</p>
+
+      <ul v-for="employee in employees">
+        <li>
+          {{employee}}
+        </li>
+      </ul>
+      <button v-on:click="$store.dispatch('employees/fetchEmployeesAction')">fetch</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    employees() {
+      return this.$store.state.employees.employees;
+    }
+  }
+}
 </script>
 
 <style>
