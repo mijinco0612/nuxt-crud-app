@@ -29,13 +29,28 @@ export const actions = {
     })
   },
 
-  deleteEmployeesAction : async function (context,employeesId) {
+  // stateを差し替える方法から、削除が成功したらfetchし直す方法へ変更した。
+  // deleteEmployeesAction : async function (context,employeesId) {
+  //
+  //   console.log(employeesId);
+  //   const url = '/api/employees/' + employeesId
+  //   console.log(url);
+  //   axios.delete(url).then((response) => {
+  //     context.commit('deleteEmployees', employeesId)
+  //     return true;
+  //   }, (err) => {
+  //     console.log(err)
+  //     return false;
+  //   })
+  // },
+
+  deleteEmployeesAction : async function ({ commit, dispatch },employeesId) {
 
     console.log(employeesId);
     const url = '/api/employees/' + employeesId
     console.log(url);
     axios.delete(url).then((response) => {
-      context.commit('deleteEmployees', employeesId)
+      dispatch('fetchEmployeesAction')
       return true;
     }, (err) => {
       console.log(err)
