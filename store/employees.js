@@ -41,5 +41,21 @@ export const actions = {
       console.log(err)
       return false;
     })
+  },
+
+  createEmployeesAction : async function ({ commit, dispatch },createEmployee) {
+
+    console.log(createEmployee);
+    const url = '/api/employees/'
+    console.log(url);
+    axios.post(url,createEmployee).then((response) => {
+      dispatch('fetchEmployeesAction')
+      return true;
+    }, (err) => {
+      console.log(err)
+      return false;
+    })
   }
+
+
 }
