@@ -28,8 +28,7 @@
         style="width: 80%;margin-right: auto;margin-left: auto">
 
         <el-table-column
-          label="Name"
-          width="300">
+          label="Name">
           <template slot-scope="scope">
 
               <div slot="reference" class="name-wrapper">
@@ -40,8 +39,7 @@
         </el-table-column>
 
         <el-table-column
-          label="Role"
-          width="300">
+          label="Role">
           <template slot-scope="scope">
             <el-input type="text" v-model="scope.row.role"></el-input>
           </template>
