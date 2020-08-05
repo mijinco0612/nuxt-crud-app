@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 export const state = () => ({
   employees:[{id:1,name:'defaultName1',role:'defaultRole'},{id:2,name:'defaultName2',role:'defaultRole'},]
 })
@@ -6,14 +7,14 @@ export const state = () => ({
 export const mutations = {
   updateEmployees : function(state, payload) {
     state.employees = payload
-  },
-  deleteEmployees : function(state, employeeId) {
-
-    const replaceData = state.employees.filter(function(item, index){
-      if (item.id !== employeeId) return true;
-    });
-    state.employees = replaceData
   }
+  // deleteEmployees : function(state, employeeId) {
+  //
+  //   const replaceData = state.employees.filter(function(item, index){
+  //     if (item.id !== employeeId) return true;
+  //   });
+  //   state.employees = replaceData
+  // }
 }
 
 export const actions = {
@@ -30,6 +31,7 @@ export const actions = {
   },
 
   // stateを差し替える方法から、削除が成功したらfetchし直す方法へ変更した。
+  // 教材の都合上ここを一旦コメントアウトしておく
   // deleteEmployeesAction : async function (context,employeesId) {
   //
   //   console.log(employeesId);
@@ -70,7 +72,21 @@ export const actions = {
       console.log(err)
       return false;
     })
+  },
+
+  updateEmployeesAction : async function ({ commit, dispatch },updateEmployee) {
+    console.log(updateEmployee);
+    const url = '/api/employees/' + updateEmployee.id
+    console.log(url);
+
+    const updateEmployeeBody = {name:updateEmployee.name,role:updateEmployee.role}
+
+    axios.put(url,updateEmployeeBody).then((response) => {
+      dispatch('fetchEmployeesAction')
+      return true;
+    }, (err) => {
+      console.log(err)
+      return false;
+    })
   }
-
-
 }
