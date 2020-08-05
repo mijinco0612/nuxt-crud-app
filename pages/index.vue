@@ -2,6 +2,12 @@
   <div class="container">
     <div>
       <p>{{ $store.state.employees.employees }}</p>
+      <p>{{ createEmployee }}</p>
+      <label>name</label>
+      <input type="text" v-model="createEmployee.name">
+      <label>role</label>
+      <input type="text" v-model="createEmployee.role">
+      <button v-on:click="$store.dispatch('employees/createEmployeesAction',createEmployee)">create</button>
 
       <ul v-for="employee in employees">
         <li>
@@ -16,6 +22,11 @@
 
 <script>
 export default {
+  data(){
+    return{
+      createEmployee : {name : '' ,role:'' }
+    }
+  },
   mounted() {
     this.$store.dispatch('employees/fetchEmployeesAction')
   },
